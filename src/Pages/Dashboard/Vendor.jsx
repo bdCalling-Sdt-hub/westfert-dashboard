@@ -1,179 +1,252 @@
-import React from "react";
-import { Avatar, Card, Table, Space, Button } from "antd";
-import { Link } from "react-router-dom";
-import randomImg from "../../assets/randomProfile2.jpg";
+import { Card, Table, Avatar, Input, Select, Tag } from "antd";
+import {
+  SearchOutlined,
+  EditOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 
-const Vendor = () => {
-  const barber = {
-    id: "1",
-    name: "John Doe",
-    email: "john@example.com",
-    phoneNumber: "+123456789",
-    address: "123 Main St, Cityville",
-    experienceLevel: "Senior",
-    rating: 4.8,
-    totalServices: 120,
-    totalEarnings: "$6000",
-    status: "Active",
-    profileImg: "https://randomuser.me/api/portraits/men/1.jpg",
-    reviews: [
-      {
-        id: "r1",
-        customerName: "Alice Johnson",
-        rating: 5,
-        comment: "Great service, very professional!",
-        date: "2023-12-12",
-      },
-      {
-        id: "r2",
-        customerName: "Bob Smith",
-        rating: 4,
-        comment: "Good experience overall.",
-        date: "2023-12-10",
-      },
-      {
-        id: "r3",
-        customerName: "Charlie Brown",
-        rating: 3,
-        comment: "Service was okay, could be better.",
-        date: "2023-12-09",
-      },
-    ],
-  };
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Rectangle,
+} from "recharts";
 
-  const columns = [
-    {
-      title: "Customer Name",
-      dataIndex: "customerName",
-      key: "customerName",
-    },
-    {
-      title: "Rating",
-      dataIndex: "rating",
-      key: "rating",
-      render: (rating) => (
-        <span className="text-yellow-500 font-bold">{rating} / 5</span>
-      ),
-    },
-    {
-      title: "Comment",
-      dataIndex: "comment",
-      key: "comment",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-      render: (date) => new Date(date).toLocaleDateString(),
-    },
-    {
-      title: "Actions",
-      key: "actions",
-      render: (text, record) => (
-        <Space>
-          <Button
-            className="border border-green-600 text-green-700 hover:bg-green-600 hover:text-white"
-            onClick={() => handleReviewAction(record.id, "approve")}
-          >
-            Approve
-          </Button>
-          <Button
-            className="border border-red-600 text-red-700 hover:bg-red-600 hover:text-white"
-            onClick={() => handleReviewAction(record.id, "reject")}
-          >
-            Reject
-          </Button>
-          <Button
-            className="border border-gray-600 text-gray-700 hover:bg-gray-600 hover:text-white"
-            onClick={() => handleReviewAction(record.id, "delete")}
-          >
-            Delete
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+const data = [
+  {
+    week: "Sun",
+    TotalSales: 4000,
+    profit: 2400,
+  },
+  {
+    week: "Mon",
+    TotalSales: 3000,
+    profit: 1398,
+  },
+  {
+    week: "Tue",
+    TotalSales: 2000,
+    profit: 9800,
+  },
+  {
+    week: "Wed",
+    TotalSales: 2780,
+    profit: 3908,
+  },
+  {
+    week: "Thu",
+    TotalSales: 1890,
+    profit: 4800,
+  },
+  {
+    week: "Fri",
+    TotalSales: 2390,
+    profit: 3800,
+  },
+  {
+    week: "Sat",
+    TotalSales: 3490,
+    profit: 4300,
+  },
+];
 
-  const handleReviewAction = (reviewId, action) => {
-    console.log(`${action} review with ID: ${reviewId}`);
-    // Implement the logic for approving, rejecting, or deleting the review
-  };
+const employeeData = {
+  name: "Asadujjaman Mahfuz",
+  designation: "Sales Executive",
+  id: "FF4578EDD4",
+  email: "Asadujjaman101@bd.com",
+  contact: "073 155 4568",
+  dob: "12 Nov, 2024",
+  gender: "Male",
+  address: "284 Daffodil Dr, Mount Frere, Eastern Cape-5088 South Africa",
+  image: "https://via.placeholder.com/100",
+};
 
+const workList = [
+  {
+    id: 2450,
+    farm: "X Mans Farm",
+    manager: "Mr. Nadir",
+    recipe: "NPKC Recipe 1, 2more",
+    weight: "2 Tonnes",
+    price: "R20,000",
+    delivery: "12/1/2024, 12:30 am",
+    status: "Pending",
+  },
+  {
+    id: 2450,
+    farm: "FLASH Point",
+    manager: "Mr. Nadir",
+    recipe: "NPKC Recipe 1, 1more",
+    weight: "22 Tonnes",
+    price: "R220,000",
+    delivery: "12/1/2024, 12:30 am",
+    status: "Processing",
+  },
+  {
+    id: 2465,
+    farm: "Wayne Farm",
+    manager: "Babalwa Moloi",
+    recipe: "NPKC Recipe 1, 1more",
+    weight: "2 Tonnes",
+    price: "R200,000",
+    delivery: "12/1/2024, 12:30 am",
+    status: "On way",
+  },
+  {
+    id: 2465,
+    farm: "Wayne Farm",
+    manager: "SM. Albard",
+    recipe: "NPKC Recipe 1, 1more",
+    weight: "32 Tonnes",
+    price: "R320,000",
+    delivery: "12/1/2024, 12:30 am",
+    status: "Delivered",
+  },
+];
+
+const statusColors = {
+  Pending: "red",
+  Processing: "blue",
+  "On way": "orange",
+  Delivered: "green",
+};
+
+const EmployeeDetails = () => {
   return (
-    <div className=" mx-auto p-4">
-      <div className="mb-4">
-        <div className="flex gap-5 items-center">
-          <div className="flex flex-col items-center justify-center gap-5">
-            <div className=" border-4 p-1 rounded-full">
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <div className="flex h-[530px] w-full gap-2">
+        <Card className="p-4 w-4/6 shadow-md">
+          <div className="flex gap-10">
+            <div className="flex flex-col items-center gap-6">
               <img
-                src={barber.profileImg || randomImg}
-                alt={barber.name}
-                size={100}
-                className="border-2 w-[200px] h-[200px] rounded-full  border-gray-300"
+                src={"https://i.ibb.co.com/hF8qFB5L/Rectangle-5330.png"}
+                alt="Employee"
+                className="w-72 h-72"
               />
+              <div className="text-center">
+                <h2 className="text-xl font-semibold">{employeeData.name}</h2>
+                <p className="text-blue-500 text-lg">
+                  {employeeData.designation}
+                </p>
+              </div>
             </div>
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-800">
-                {barber.name}
-              </h2>
-              <p className="text-gray-600 text-lg font-semibold">
-                {barber.email}
-              </p>
+            <div className="grid gap-4 mt-4">
+              {Object.entries(employeeData).map(
+                ([key, value]) =>
+                  key !== "image" && (
+                    <p key={key}>
+                      <span className="font-semibold capitalize">
+                        {key.replace("_", " ")}:
+                      </span>{" "}
+                      {value}
+                    </p>
+                  )
+              )}
             </div>
           </div>
-          <div className="ml-4 text-xl flex flex-col gap-1">
-            <p className="text-gray-600">
-              <span className="font-semibold">Experience Level:</span>{" "}
-              {barber.experienceLevel}
-            </p>
-
-            <p className="text-gray-600">
-              <span className="font-semibold">Phone Number:</span>{" "}
-              {barber.phoneNumber}
-            </p>
-            <p className="text-gray-600">
-              <span className="font-semibold">Address: </span>
-              {barber.address}
-            </p>
-            <p className="text-gray-600">
-              <span className="font-semibold">Total Services</span>{" "}
-              {barber.totalServices}
-            </p>
-            <p className="text-gray-600">
-              <span className="font-semibold">Total Earnings:</span>{" "}
-              {barber.totalEarnings}
-            </p>
-            <p className="text-gray-600">
-              <span className="font-semibold"> Status:</span>{" "}
-              <span
-                className={`px-2 py-1  ${
-                  barber.status === "Active"
-                    ? "text-green-500"
-                    : barber.status === "Inactive"
-                    ? "text-red-500"
-                    : "text-orange-500"
-                }`}
-              >
-                {barber.status}
-              </span>
-            </p>
-            <p className="text-gray-600">
-              <span className="font-semibold">Average Rating:</span>{" "}
-              {barber.rating}
-            </p>
-          </div>
-        </div>
+        </Card>
+        {employeeData?.designation === "Sales Executive" && (
+          <Card className="p-1 w-2/6 shadow-md">
+            <div>
+              <h1 className="text-xl font-semibold">Performance Statistics</h1>
+              <div className="grid grid-cols-3 gap-2 my-10">
+                <div className="bg-green-100 rounded-2xl p-4">
+                  <p className="text-sm">Sales This Week</p>
+                  <p className="text-xl text-center font-semibold">0</p>
+                </div>
+                <div className="bg-green-100 rounded-2xl p-4">
+                  <p className="text-sm">Sales Last Week</p>
+                  <p className="text-xl text-center font-semibold">0</p>
+                </div>
+                <div className="bg-green-100 rounded-2xl p-4">
+                  <p className="text-sm">Sales All Time</p>
+                  <p className="text-xl text-center font-semibold">0</p>
+                </div>
+              </div>
+              <div>
+                <ResponsiveContainer width="100%" height={250}>
+                  <BarChart
+                    width={500}
+                    height={300}
+                    data={data}
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="week" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar
+                      dataKey="TotalSales"
+                      fill="#6DBD44"
+                      barSize={20}
+                      radius={[20, 20, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </Card>
+        )}
       </div>
 
-      <Card title="Customer Reviews" className="shadow-lg mt-20">
-        <Table
-          columns={columns}
-          dataSource={barber.reviews}
-          rowKey={(record) => record.id}
-        />
-      </Card>
+      {employeeData?.designation === "Sales Executive" && (
+        <div className="mt-6 bg-white p-4 shadow-md rounded-md">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold">Work List of Employees</h3>
+            <Input
+              placeholder="Search here"
+              prefix={<SearchOutlined />}
+              className="w-64"
+            />
+          </div>
+          <Table dataSource={workList} rowKey="id" pagination={{ pageSize: 5 }}>
+            <Table.Column title="Quote no." dataIndex="id" key="id" />
+            <Table.Column title="Farmers Name" dataIndex="farm" key="farm" />
+            <Table.Column title="Manager" dataIndex="manager" key="manager" />
+            <Table.Column
+              title="Quote Recipe"
+              dataIndex="recipe"
+              key="recipe"
+            />
+            <Table.Column title="Weight" dataIndex="weight" key="weight" />
+            <Table.Column title="Price" dataIndex="price" key="price" />
+            <Table.Column
+              title="Delivery Time"
+              dataIndex="delivery"
+              key="delivery"
+            />
+            <Table.Column
+              title="Status"
+              dataIndex="status"
+              key="status"
+              render={(status) => (
+                <Tag color={statusColors[status]}>{status}</Tag>
+              )}
+            />
+            <Table.Column
+              title="Action"
+              key="action"
+              render={() => (
+                <InfoCircleOutlined className="text-xl text-gray-600 cursor-pointer" />
+              )}
+            />
+          </Table>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Vendor;
+export default EmployeeDetails;

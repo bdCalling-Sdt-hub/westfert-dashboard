@@ -1,85 +1,131 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Table, Input, Space } from "antd";
+import { FaSearch, FaFilter, FaInfoCircle } from "react-icons/fa";
+import { FaEye } from "react-icons/fa6";
 
-const User = () => {
-  const { id } = useParams();
-
-  // Sample user data
-  const user = {
-    name: "John Doe",
-    id: "#5568164",
-    email: "johndoe@example.com",
-    address: {
-      street: "123 Main St",
-      city: "Los Angeles",
-      state: "CA",
-      zip: "90001",
-      country: "USA",
+const CustomerDetails = () => {
+  const columns = [
+    { title: "Quote. no.", dataIndex: "quoteNo", key: "quoteNo" },
+    { title: "S. executive", dataIndex: "executive", key: "executive" },
+    { title: "Manager", dataIndex: "manager", key: "manager" },
+    { title: "Quote Recipe", dataIndex: "recipe", key: "recipe" },
+    { title: "Weight", dataIndex: "weight", key: "weight" },
+    { title: "Price", dataIndex: "price", key: "price" },
+    { title: "Delivery Time", dataIndex: "deliveryTime", key: "deliveryTime" },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => (
+        <span className={`text-${text.color}`}>{text.label}</span>
+      ),
     },
-    phone: "+1 (555) 123-4567",
-    imgUrl: "https://randomuser.me/api/portraits/men/1.jpg",
-  };
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: () => (
+        <Space>
+          <FaEye size={20} className="text-gray-600 cursor-pointer" />
+        </Space>
+      ),
+    },
+  ];
 
-  const imgUrl =
-    user?.imgUrl ||
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmtj40PvvTQ1g64pgKZ2oKEk-tqT9rA4CXSA&s";
+  const data = [
+    {
+      quoteNo: 2472,
+      executive: "Asad Ujjaman",
+      manager: "Mr. Nadir",
+      recipe: "NPKC Recipe 1, 2more",
+      weight: "2 Tonnes",
+      price: "R20,000",
+      deliveryTime: "12/1/2024, 12:30 am",
+      status: { label: "Pending", color: "red-500" },
+    },
+    {
+      quoteNo: 2450,
+      executive: "Shameemah",
+      manager: "Mr. Nadir",
+      recipe: "NPKC Recipe 1, 1more",
+      weight: "22 Tonnes",
+      price: "R220,000",
+      deliveryTime: "12/1/2024, 12:30 am",
+      status: { label: "Processing", color: "blue-500" },
+    },
+    {
+      quoteNo: 2450,
+      executive: "Sabbir",
+      manager: "Babalwa Moloi",
+      recipe: "NPKC Recipe 1, 1more",
+      weight: "22 Tonnes",
+      price: "R220,000",
+      deliveryTime: "12/1/2024, 12:30 am",
+      status: { label: "On way", color: "yellow-500" },
+    },
+    {
+      quoteNo: 2450,
+      executive: "Awami Santo",
+      manager: "SM. Albard",
+      recipe: "NPKC Recipe 1, 1more",
+      weight: "32 Tonnes",
+      price: "R320,000",
+      deliveryTime: "12/1/2024, 12:30 am",
+      status: { label: "Delivered", color: "green-500" },
+    },
+  ];
 
   return (
-    <div>
-      <div className="">
-        <div className="flex gap-3 items-center ">
+    <div className="bg-gray-100 p-5 rounded-lg">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-4">Customer Details</h2>
+        <div className="flex items-center gap-6">
           <img
-            className="rounded-full w-16 h-16"
-            src={
-              imgUrl?.startsWith("http")
-                ? imgUrl
-                : `${import.meta.env.VITE_BASE_URL}${imgUrl}`
-            }
-            alt="img"
+            src="https://i.ibb.co.com/hF8qFB5L/Rectangle-5330.png"
+            alt="customer"
+            className="w-52 h-52 rounded-lg"
           />
-          <div>
-            <h1 className="text-2xl font-bold">{user?.name}</h1>
-            <p className="text-sm text-gray-400">User ID: {user.id} </p>
-          </div>
-        </div>
-        <div className="grid my-5 grid-cols-2 gap-5 w-[70%]">
-          <div className="p-3 bg-white h-20 rounded-2xl shadow-sm">
-            <h1 className="font-semibold text-sm border-b-2 border-dashed">
-              Name
-            </h1>
-            <p className="text-lg my-2">{user?.name}</p>
-          </div>
-          <div className="p-3 bg-white h-20 rounded-2xl shadow-sm">
-            <h1 className="font-semibold text-sm border-b-2 border-dashed">
-              Email
-            </h1>
-            <p className="text-lg my-2">{user?.email}</p>
-          </div>
-          <div className="p-3 bg-white h-20 rounded-2xl shadow-sm">
-            <h1 className="font-semibold text-sm border-b-2 border-dashed">
-              Phone
-            </h1>
-            <p className="text-lg my-2">{user?.phone}</p>
-          </div>
-          <div className="p-3 bg-white h-20 rounded-2xl shadow-sm">
-            <h1 className="font-semibold text-sm border-b-2 border-dashed">
-              Address
-            </h1>
-            <p className="text-lg my-2">
-              {user?.address ? (
-                <>
-                  {user?.address?.street}, {user?.address?.state},{" "}
-                  {user?.address?.city}, {user?.address?.country}
-                </>
-              ) : (
-                "N/A"
-              )}
+          <div className="text-sm space-y-4">
+            <p>
+              <strong>Customer Name:</strong> X Mans Farm
+            </p>
+            <p>
+              <strong>Address:</strong> 284 Daffodil Dr, Mount Frere, Eastern
+              Cape - 5088 South Africa
+            </p>
+            <p>
+              <strong>Serial Number:</strong> sr123401
+            </p>
+            <p>
+              <strong>Email:</strong> Asadujjaman101@bd.com
+            </p>
+            <p>
+              <strong>Contact Number:</strong> 073 155 4568
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow-md mt-5">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold">Quotes List</h2>
+          <div className="flex items-center gap-2">
+            <Input
+              placeholder="Search here"
+              prefix={<FaSearch className="text-gray-500" />}
+              className="w-80 rounded-full h-12"
+            />
+          </div>
+        </div>
+        <Table
+          columns={columns}
+          dataSource={data}
+          rowKey="quoteNo"
+          pagination={false}
+        />
       </div>
     </div>
   );
 };
 
-export default User;
+export default CustomerDetails;

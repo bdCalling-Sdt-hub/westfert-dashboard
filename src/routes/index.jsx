@@ -25,6 +25,7 @@ import QuoteHistory from "../Pages/Dashboard/QuoteHistory";
 import QuoteUpdate from "../Pages/Dashboard/QuoteUpdate";
 import RawMaterial from "../Pages/Dashboard/RawMaterial";
 import StandardRecipe from "../Pages/Dashboard/StandardRecipe";
+import SingleQuoteUpdate from "../Pages/Dashboard/SingleQuoteUpdate";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/quote-history",
         element: <QuoteHistory />,
+      },
+      {
+        path: "/quote-details/:id",
+        element: <SingleQuoteUpdate />,
       },
       {
         path: "/quote-update",
