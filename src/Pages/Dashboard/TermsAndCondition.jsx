@@ -11,12 +11,8 @@ import rentMeLogo from "../../assets/navLogo.png";
 const TermsAndCondition = () => {
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const [selectedTab, setSelectedTab] = useState("USER");
-  const isLoading = false;
 
-  useEffect(() => {
-    setContent(content);
-  }, [selectedTab]);
+  const isLoading = false;
 
   // const {
   //   data: termsAndCondition,
@@ -58,46 +54,13 @@ const TermsAndCondition = () => {
     }
   };
 
-  const tabContent = {
-    USER: termsAndConditionData,
-    VENDOR: termsAndConditionData,
-    CUSTOMER: termsAndConditionData,
-  };
-
   return (
-    <div>
+    <div className="p-6 bg-white">
       <Title className="mb-4">Terms and Conditions</Title>
-
-      <div className="flex justify-center gap-4 mb-4">
-        <button
-          className={`px-4 rounded-2xl py-2 ${
-            selectedTab === "USER" ? "bg-primary text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setSelectedTab("USER")}
-        >
-          Users
-        </button>
-        <button
-          className={`px-4 rounded-2xl py-2 ${
-            selectedTab === "VENDOR" ? "bg-primary text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setSelectedTab("VENDOR")}
-        >
-          Vendors
-        </button>
-        <button
-          className={`px-4 rounded-2xl py-2 ${
-            selectedTab === "CUSTOMER" ? "bg-primary text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setSelectedTab("CUSTOMER")}
-        >
-          Customers
-        </button>
-      </div>
 
       <JoditEditor
         ref={editor}
-        value={tabContent[selectedTab]}
+        value={content}
         onChange={(newContent) => {
           setContent(newContent);
         }}

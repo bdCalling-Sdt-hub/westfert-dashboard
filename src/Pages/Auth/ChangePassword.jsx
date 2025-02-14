@@ -137,8 +137,8 @@ const ChangePassword = () => {
               width: 178,
               height: 48,
               fontWeight: "400px",
-              background: "#8b0000",
-              color: "white",
+              background: "#6DBD44",
+              color: "black",
             }}
             className="roboto-medium text-sm leading-4"
           >

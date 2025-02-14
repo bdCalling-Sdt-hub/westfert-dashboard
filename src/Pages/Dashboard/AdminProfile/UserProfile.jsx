@@ -156,8 +156,8 @@ const PersonalInfo = () => {
                   width: 178,
                   height: 48,
                   fontWeight: "400px",
-                  background: "#8b0000",
-                  color: "white",
+                  background: "#6DBD44",
+                  color: "black",
                 }}
                 className="roboto-medium mt-10 text-sm leading-4"
               >

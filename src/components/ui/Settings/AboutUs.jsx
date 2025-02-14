@@ -1,41 +1,80 @@
+import React, { useState, useRef, useEffect } from "react";
+import JoditEditor from "jodit-react";
+
+import toast from "react-hot-toast";
+// import {
+//   usePrivacyPolicyQuery,
+//   useUpdatePricyPolicyMutation,
+// } from "../../redux/apiSlices/privacyPolicySlice";
+
 const AboutUs = () => {
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
+
+  const isLoading = false;
+
+  // const {
+  //   data: privacyPolicy,
+  //   isLoading,
+  //   refetch,
+  // } = usePrivacyPolicyQuery(selectedTab);
+
+  // const [updatePricyPolicy] = useUpdatePricyPolicyMutation();
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <img src={rentMeLogo} alt="" />
+      </div>
+    );
+  }
+
+  const privacyPolicy = [];
+
+  const privacyPolicyData = privacyPolicy?.content;
+
+  const termsDataSave = async () => {
+    const data = {
+      content: content,
+      userType: selectedTab,
+    };
+
+    try {
+      const res = await updatePricyPolicy(data).unwrap();
+      if (res.success) {
+        toast.success("Privacy Policy updated successfully");
+        setContent(res.data.content);
+        refetch();
+      } else {
+        toast.error("Something went wrong");
+      }
+    } catch (error) {
+      console.error("Update failed:", error);
+      toast.error("Update failed. Please try again.");
+    }
+  };
+
   return (
-    <div>
-      <h1 className="text-center text-3xl">About Us</h1>
-      <p className="my-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quisquam,
-        nulla doloremque enim omnis mollitia dolor deserunt ipsam placeat
-        explicabo ratione nihil numquam beatae neque facilis ducimus dolore hic
-        ipsa rerum cum? Omnis, soluta praesentium ex modi libero animi quasi!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo aperiam
-        fuga quisquam, nemo, error cupiditate sapiente maxime voluptas porro eum
-        nihil nisi. Aut tempore ducimus repellendus quos ipsum doloribus, eaque
-        cum ullam incidunt eum. Ducimus nam iste illo laudantium aspernatur?
-      </p>
-      <p className="my-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quisquam,
-        nulla doloremque enim omnis mollitia dolor deserunt ipsam placeat
-        explicabo ratione nihil numquam beatae neque facilis ducimus dolore hic
-        ipsa rerum cum? Omnis, soluta praesentium ex modi libero animi quasi!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo aperiam
-        fuga quisquam, nemo, error cupiditate sapiente maxime voluptas porro eum
-        nihil nisi. Aut tempore ducimus repellendus quos ipsum doloribus, eaque
-        cum ullam incidunt eum. Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Corrupti facere repudiandae, expedita minus aliquid
-        dolor blanditiis reiciendis amet doloribus autem debitis earum et,
-        inventore libero deserunt similique nulla ducimus ut! Ducimus nam iste
-        illo laudantium aspernatur?
-      </p>
-      <p className="my-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum quisquam,
-        nulla doloremque enim omnis mollitia dolor deserunt ipsam placeat
-        explicabo ratione nihil numquam beatae neque facilis ducimus dolore hic
-        ipsa rerum cum? Omnis, soluta praesentium ex modi libero animi quasi!
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo aperiam
-        fuga quisquam, nemo, error cupiditate sapiente maxime voluptas porro eum
-        nihil nisi. Aut tempore ducimus repellendus quos ipsum doloribus, eaque
-        cum ullam incidunt eum. Ducimus nam iste illo laudantium aspernatur?
-      </p>
+    <div className="p-6 bg-white">
+      <h1 className="text-2xl font-semibold">About Us</h1>
+
+      <JoditEditor
+        ref={editor}
+        value={privacyPolicyData}
+        onChange={(newContent) => {
+          setContent(newContent);
+        }}
+      />
+
+      <div className="flex items-center justify-center mt-5">
+        <button
+          onClick={termsDataSave}
+          type="submit"
+          className="bg-primary text-white w-[160px] h-[42px] rounded-lg"
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

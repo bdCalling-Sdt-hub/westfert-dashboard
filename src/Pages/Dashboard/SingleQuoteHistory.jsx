@@ -5,7 +5,7 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 
-const QuoteDetails = () => {
+const SingleQuoteHistory = () => {
   const summaryData = [
     { key: "1", label: "Subtotal", value: "R400" },
     { key: "2", label: "Freight & Logistics", value: "R350" },
@@ -18,7 +18,7 @@ const QuoteDetails = () => {
       <Card className="mb-4">
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold">
-            Quotes status: <span className="text-red-500">Pending</span>
+            Quotes status: <span className="text-green-500">Approved</span>
           </span>
           <Button icon={<PrinterOutlined />} type="default">
             Print
@@ -79,8 +79,8 @@ const QuoteDetails = () => {
                   <span className="flex items-center gap-2">
                     <img
                       src={record?.image}
-                      className="w-12 h-12 rounded-full"
                       alt=""
+                      className="w-12 h-12 rounded-full"
                     />
                     {text}
                   </span>
@@ -128,4 +128,4 @@ const QuoteDetails = () => {
   );
 };
 
-export default QuoteDetails;
+export default SingleQuoteHistory;

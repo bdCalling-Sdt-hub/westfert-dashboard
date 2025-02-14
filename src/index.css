@@ -47,12 +47,12 @@
 .ant-menu-item-selected {
   background: #6dbd44 !important;
   border-radius: 0 60px 60px 0 !important;
-  color: white !important;
+  color: black !important;
   width: "100%" !important;
 }
 
 .ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
-  color: white !important;
+  color: black !important;
 }
 
 .ant-menu .ant-menu-item .ant-menu-item-icon + span {
@@ -60,7 +60,7 @@
 }
 
 .ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title {
-  color: white !important;
+  color: black !important;
 }
 
 .ant-menu .ant-menu-title-content {

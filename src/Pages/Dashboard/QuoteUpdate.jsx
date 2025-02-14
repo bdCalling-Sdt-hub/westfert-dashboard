@@ -41,17 +41,6 @@ const QuoteUpdateTable = () => {
       deliveryTime: "12/1/2024, 12:30 am",
       status: "Sent",
     },
-    {
-      key: "4",
-      quoteNo: "2450",
-      farmersName: "Wayne Farm",
-      executive: "Santo",
-      quoteRecipe: "NPKC Recipe 1, 1more",
-      weight: "32 Tonnes",
-      price: "R320,000",
-      deliveryTime: "12/1/2024, 12:30 am",
-      status: "Approved",
-    },
   ];
 
   const columns = [
