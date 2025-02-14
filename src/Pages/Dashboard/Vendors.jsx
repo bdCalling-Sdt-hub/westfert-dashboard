@@ -1,67 +1,53 @@
 import React, { useState } from "react";
-import { Table, Button, Space, Avatar, Select } from "antd";
+import {
+  Table,
+  Button,
+  Space,
+  Avatar,
+  Select,
+  ConfigProvider,
+  Input,
+} from "antd";
 import { Link } from "react-router-dom";
 import randomImg from "../../assets/randomProfile2.jpg";
+import { FaEye, FaLock } from "react-icons/fa6";
 
 const Vendors = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [pageSize, setPageSize] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Dummy data for barbers
-  const barbers = {
+  // Dummy data for staff
+  const staffList = {
     data: {
       data: [
         {
           id: "1",
           name: "John Doe",
           email: "john@example.com",
-          phoneNumber: "+123456789",
-          address: "123 Main St, Cityville",
-          experienceLevel: "Senior",
-          rating: 4.8,
-          totalServices: 120,
-          totalEarnings: "$6000",
-          status: "Active",
-          profileImg: "https://randomuser.me/api/portraits/men/1.jpg",
-          complaint: null,
+          companyName: "RentMe",
+          designation: "Software Engineer",
         },
         {
           id: "2",
           name: "Jane Smith",
           email: "jane@example.com",
-          phoneNumber: "+123456780",
-          address: "456 Secondary St, Townsville",
-          experienceLevel: "Intermediate",
-          rating: 4.5,
-          totalServices: 200,
-          totalEarnings: "$8000",
-          status: "Inactive",
-          profileImg: "https://randomuser.me/api/portraits/women/2.jpg",
-          complaint: null,
+          companyName: "RentMe",
+          designation: "Product Manager",
         },
         {
           id: "3",
           name: "Sam Wilson",
           email: "sam@example.com",
-          phoneNumber: "+123456781",
-          address: "789 Tertiary St, Suburb",
-          experienceLevel: "Junior",
-          rating: 4.2,
-          totalServices: 50,
-          totalEarnings: "$2000",
-          status: "Suspended",
-          profileImg: "https://randomuser.me/api/portraits/men/3.jpg",
-          complaint: {
-            reason: "Violation of salon policies",
-            amount: "$50",
-          },
+          companyName: "RentMe",
+          designation: "UX Designer",
         },
-        // Add more dummy barbers as needed
+        // Add more dummy staff as needed
       ],
     },
   };
 
-  const data = barbers?.data?.data;
+  const data = staffList?.data?.data;
 
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
@@ -77,20 +63,6 @@ const Vendors = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text, record) => {
-        const name = record.name || "Unknown";
-        const imgUrl = record.profileImg || randomImg;
-        const fullImgUrl = imgUrl.startsWith("http")
-          ? imgUrl
-          : `${import.meta.env.VITE_BASE_URL}${imgUrl}`;
-
-        return (
-          <Space>
-            <Avatar src={fullImgUrl} alt={name} size="large" />
-            <span>{name}</span>
-          </Space>
-        );
-      },
     },
     {
       title: "Email",
@@ -98,103 +70,26 @@ const Vendors = () => {
       key: "email",
     },
     {
-      title: "Phone Number",
-      dataIndex: "phoneNumber",
-      key: "phoneNumber",
+      title: "Company Name",
+      dataIndex: "companyName",
+      key: "companyName",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Designation",
+      dataIndex: "designation",
+      key: "designation",
     },
-    {
-      title: "Experience Level",
-      dataIndex: "experienceLevel",
-      key: "experienceLevel",
-    },
-    {
-      title: "Rating",
-      dataIndex: "rating",
-      key: "rating",
-      sorter: (a, b) => a.rating - b.rating,
-      render: (rating) => `${rating}`,
-    },
-    {
-      title: "Total Services",
-      dataIndex: "totalServices",
-      key: "totalServices",
-      sorter: (a, b) => a.totalServices - b.totalServices,
-    },
-    {
-      title: "Total Earnings",
-      dataIndex: "totalEarnings",
-      key: "totalEarnings",
-      sorter: (a, b) =>
-        parseFloat(a.totalEarnings.replace("$", "")) -
-        parseFloat(b.totalEarnings.replace("$", "")),
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => {
-        let color;
-        switch (status) {
-          case "Active":
-            color = "green";
-            break;
-          case "Inactive":
-            color = "red";
-            break;
-          case "Suspended":
-            color = "orange";
-            break;
-          default:
-            color = "gray";
-        }
 
-        return <span style={{ color }}>{status}</span>;
-      },
-    },
-    {
-      title: "Complaint",
-      dataIndex: "complaint",
-      key: "complaint",
-      filters: [
-        { text: "None", value: "None" },
-        { text: "Has Complaints", value: "HasComplaints" },
-      ],
-      onFilter: (value, record) => {
-        if (value === "None") {
-          return !record.complaint;
-        } else if (value === "HasComplaints") {
-          return record.complaint !== null;
-        }
-        return true;
-      },
-      render: (complaint) =>
-        complaint ? (
-          <span className="text-red-700 font-semibold">
-            {complaint.amount},<br /> for {complaint.reason}
-          </span>
-        ) : (
-          "None"
-        ),
-    },
     {
       title: "Actions",
       key: "actions",
       render: (text, record) => (
         <Space>
-          <Link to={`/barber/profile/${record.id}`}>
-            <Button className="bg-[#FFF4E3] text-[#F3B806] border-none">
-              Details
-            </Button>
+          <Link to={`/staff/profile/${record.id}`}>
+            <FaEye size={20} className="cursor-pointer" />
           </Link>
 
-          <Button className="border border-red-600 text-red-700">
-            Restrict
-          </Button>
+          <FaLock size={20} className="cursor-pointer text-red-600" />
         </Space>
       ),
     },
@@ -231,18 +126,40 @@ const Vendors = () => {
   };
 
   return (
-    <>
-      <h1 className="text-2xl font-semibold  my-5">Barbers</h1>
-      <Table
-        className="bg-white"
-        pagination={{
-          pageSize: pageSize,
+    <div className="bg-white p-5">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-semibold  my-5">Staff List</h1>
+        <Input
+          placeholder="Search"
+          style={{ width: 400, height: 50, borderRadius: 30 }}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+          value={searchTerm}
+        />
+      </div>
+      <ConfigProvider
+        theme={{
+          components: {
+            Table: {
+              headerBg: "#D2EBC5",
+              headerColor: "black",
+              selectedRowColor: "white",
+              colorBgContainer: "white",
+              colorText: "black",
+            },
+          },
         }}
-        columns={columns}
-        dataSource={data}
-        rowKey={(record) => record.id}
-      />
-    </>
+      >
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={{ pageSize, onChange: () => setPageSize() }}
+          rowKey={(record) => record.id}
+          scroll={{ x: 1000 }}
+        />
+      </ConfigProvider>
+    </div>
   );
 };
 

@@ -262,7 +262,7 @@ const Users = () => {
       key: "actions",
       render: (text, record) => (
         <Space>
-          <Link to={`/user/profile/${record.id}`}>
+          <Link to={`/client/profile/${record.id}`}>
             <Button className="bg-[#FFF4E3] text-[#F3B806] border-none">
               Details
             </Button>

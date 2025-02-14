@@ -15,11 +15,15 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { PiUserPlus } from "react-icons/pi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import Cookies from "js-cookie";
-import logo from "../../assets/barberMeLogo.png";
+import logo from "../../assets/logo.png";
 import { DiGoogleAnalytics } from "react-icons/di";
 import { BiSolidCategoryAlt } from "react-icons/bi";
-import { FaMoneyBillTransfer, FaScissors } from "react-icons/fa6";
-import { FaBorderStyle } from "react-icons/fa";
+import { FaMoneyBillTransfer, FaScissors, FaUsers } from "react-icons/fa6";
+import { FaBorderStyle, FaHistory } from "react-icons/fa";
+import { CiGrid32 } from "react-icons/ci";
+import { ImFolderUpload } from "react-icons/im";
+import { SiMaterialdesignicons } from "react-icons/si";
+import { GiFertilizerBag } from "react-icons/gi";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -40,88 +44,44 @@ const Sidebar = () => {
   const menuItems = [
     {
       key: "/",
-      icon: <LuLayoutDashboard size={24} />,
+      icon: <CiGrid32 size={24} />,
       label: (
         <Link to="/" className="">
           Dashboard
         </Link>
       ),
     },
-    // {
-    //   key: "/transactions",
-    //   icon: <DiGoogleAnalytics size={24} />,
-    //   label: <Link to="/transactions">Transactions</Link>,
-    // },
-    {
-      key: "/banners",
-      icon: <MdFeaturedPlayList size={24} />,
-      label: <Link to="/banners">Banners</Link>,
-    },
-    // {
-    //   key: "/category",
-    //   icon: <BiSolidCategoryAlt size={24} />,
-    //   label: <Link to="/category">Category</Link>,
-    // },
-    {
-      key: "/users",
-      icon: <TbUserScreen size={24} />,
-      label: <Link to="/users">Users</Link>,
-    },
-    {
-      key: "/vendors",
-      icon: <PiUserPlus size={24} />,
-      label: <Link to="/vendors">Barbers</Link>,
-    },
-    {
-      key: "subMenuSalon",
-      icon: <FaScissors size={24} />,
-      label: "Salon",
-      children: [
-        {
-          key: "/services",
-          icon: <MdMiscellaneousServices size={24} />,
-          label: (
-            <Link to="/services" className="text-white hover:text-white">
-              Services
-            </Link>
-          ),
-        },
-        {
-          key: "/salon-category",
-          icon: <BiSolidCategoryAlt size={24} />,
-          label: (
-            <Link to="/salon-category" className="text-white hover:text-white">
-              Category
-            </Link>
-          ),
-        },
-        {
-          key: "/sub-category",
-          icon: <MdCategory size={24} />,
-          label: (
-            <Link to="/sub-category" className="text-white hover:text-white">
-              Sub Category
-            </Link>
-          ),
-        },
-      ],
-    },
-    {
-      key: "/orders",
-      icon: <FaBorderStyle size={24} />,
-      label: <Link to="/orders">Orders</Link>,
-    },
-    {
-      key: "/cancellation",
-      icon: <MdCancelPresentation size={24} />,
-      label: <Link to="/cancellation">Cancellation</Link>,
-    },
-    {
-      key: "/our-transactions",
-      icon: <FaMoneyBillTransfer size={24} />,
-      label: <Link to="/our-transactions">Transactions</Link>,
-    },
 
+    {
+      key: "/staff-list",
+      icon: <PiUserPlus size={24} />,
+      label: <Link to="/staff-list">Staff List</Link>,
+    },
+    {
+      key: "/clients",
+      icon: <FaUsers size={24} />,
+      label: <Link to="/clients">Clients</Link>,
+    },
+    {
+      key: "/quote-update",
+      icon: <ImFolderUpload size={24} />,
+      label: <Link to="/quote-update">Quote Update</Link>,
+    },
+    {
+      key: "/quote-history",
+      icon: <FaHistory size={24} />,
+      label: <Link to="/quote-history">Quote History</Link>,
+    },
+    {
+      key: "/raw-material",
+      icon: <SiMaterialdesignicons size={24} />,
+      label: <Link to="/raw-material">Raw Material</Link>,
+    },
+    {
+      key: "/standard-recipe",
+      icon: <GiFertilizerBag size={24} />,
+      label: <Link to="/standard-recipe">Standard Recipe</Link>,
+    },
     {
       key: "subMenuSetting",
       icon: <IoSettingsOutline size={24} />,
@@ -146,14 +106,7 @@ const Sidebar = () => {
             </Link>
           ),
         },
-        {
-          key: "/offer-list",
-          label: (
-            <Link to="/offer-list" className="text-white hover:text-white">
-              Offer List
-            </Link>
-          ),
-        },
+
         {
           key: "/about-us",
           label: (
@@ -177,7 +130,7 @@ const Sidebar = () => {
           key: "/privacy-policy",
           label: (
             <Link to="/privacy-policy" className="text-white hover:text-white">
-              Privacy Policy
+              App Support
             </Link>
           ),
         },
