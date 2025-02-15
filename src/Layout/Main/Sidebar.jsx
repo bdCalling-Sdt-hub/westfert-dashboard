@@ -73,14 +73,14 @@ const Sidebar = () => {
       label: <Link to="/quote-history">Quote History</Link>,
     },
     {
-      key: "/raw-material",
-      icon: <SiMaterialdesignicons size={24} />,
-      label: <Link to="/raw-material">Raw Material</Link>,
-    },
-    {
       key: "/standard-recipe",
       icon: <GiFertilizerBag size={24} />,
       label: <Link to="/standard-recipe">Standard Recipe</Link>,
+    },
+    {
+      key: "/raw-material",
+      icon: <SiMaterialdesignicons size={24} />,
+      label: <Link to="/raw-material">Raw Material</Link>,
     },
     {
       key: "subMenuSetting",

@@ -95,10 +95,10 @@ const Notifications = () => {
   );
 
   return (
-    <div>
+    <div className="p-5 bg-white">
       <div className="flex items-center justify-between mb-4">
         <Title className="text-[22px]">All Notifications</Title>
-        <button className="bg-[#5c2579cc] text-white h-10 px-4 rounded-md">
+        <button className="bg-primary px-7 py-3 text-white font-semibold text-lg rounded-3xl">
           Read All
         </button>
       </div>
